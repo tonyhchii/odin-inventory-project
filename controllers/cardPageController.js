@@ -1,7 +1,7 @@
 const db = require("../db/queries");
 const cardPageController = async (req, res) => {
-  const cards = await db.getAllCards();
-  console.log(cards);
+  const { name } = req.query;
+  const cards = name ? await db.getCardByName(name) : await db.getAllCards();
   res.render("cardPage", { cards: cards });
 };
 

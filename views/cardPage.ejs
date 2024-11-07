@@ -11,10 +11,14 @@
     <%- include('partials/header')  %>
     <div class="body grid">
         <%- include('partials/sidebar') %>
+        <% if(locals.cards != undefined) { %>
         <div class="card-container grid">
             <% locals.cards.forEach((card) => { %>
                 <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname}) %>
             <% }) %>
+            <% }  else { %>
+                <h2>Cards Not Found</h2>
+            <% } %>
         </div>
     </div>
 </body>
