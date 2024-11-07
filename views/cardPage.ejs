@@ -11,7 +11,9 @@
     <div class="body grid">
         <%- include('partials/sidebar') %>
         <div class="body-content">
-            <h2> Welcome To Card Shop</h2>
+            <% locals.cards.forEach((card) => { %>
+                <%- include('partials/card', {url: card.url, price: card.price, quantity: card.quantity}) %>
+            <% }) %>
         </div>
     </div>
 </body>

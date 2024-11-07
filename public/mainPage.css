@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.header {
+  margin: 1rem;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.body {
+  grid-template-columns: 1fr 4fr;
+}

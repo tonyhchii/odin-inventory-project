@@ -1,4 +1,7 @@
+#! /usr/bin/env node
 const { Client } = require("pg");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const SQL = `CREATE TABLE IF NOT EXISTS sets (
 set_id VARCHAR(255) PRIMARY KEY,
@@ -32,7 +35,7 @@ async function main() {
   console.log("seeding...");
   const client = new Client({
     connectionString:
-      "postgresql://pokemon-inventory-app:xhFordUe3NW4@ep-misty-sky-a57qgg4m.us-east-2.aws.neon.tech/pokemon-inventory-app?sslmode=require",
+      "postgresql://neondb_owner:1CMgtuTOp3Xh@ep-black-poetry-a5m9g3or.us-east-2.aws.neon.tech/neondb?sslmode=require",
   });
   await client.connect();
   await client.query(SQL);
