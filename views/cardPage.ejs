@@ -7,19 +7,39 @@
     <link rel="stylesheet" href="mainPage.css">
     <link rel="stylesheet" href="card.css">
 </head>
+
 <body>
     <%- include('partials/header')  %>
     <div class="body grid">
         <%- include('partials/sidebar') %>
         <% if(locals.cards != undefined) { %>
-        <div class="card-container grid">
-            <% locals.cards.forEach((card) => { %>
-                <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname}) %>
-            <% }) %>
-            <% }  else { %>
-                <h2>Cards Not Found</h2>
-            <% } %>
-        </div>
+            <div class="container">
+                <form id="orderByForm" action="/cards" method="GET">
+                    <input name="name" type="hidden" id="search2"/>
+                    <select onchange="getSearch()" name="orderBy" id="orderBy">
+                        <option value="alphabetical">A-Z</option>
+                        <option value="type">Type</option>
+                        <option value="price">Price</option>
+                    </select>
+                </form>
+                <div class="card-container grid">
+                <% locals.cards.forEach((card) => { %>
+                    <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname}) %>
+                <% }) %>
+                <% }  else { %>
+                    <h2>Cards Not Found</h2>
+                <% } %>
+                        </div>
+            </div>
     </div>
 </body>
+<script>
+    const getSearch = () => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const hiddenSearch = document.getElementById('search2');
+        hiddenSearch.value = searchParams.get('name');
+        const orderForm = document.getElementById('orderByForm');
+        orderForm.submit();
+    }
+</script>
 </html>

@@ -1,8 +1,8 @@
 const db = require("../db/queries");
 const cardPageController = async (req, res) => {
-  const { name } = req.query;
-  const cards = name ? await db.getCardByName(name) : await db.getAllCards();
-  res.render("cardPage", { cards: cards });
+  const { name, orderBy } = req.query;
+  const cards = await db.getCardByName(name, orderBy);
+  res.render("cardPage", { cards: cards, searchBar: name });
 };
 
 module.exports = cardPageController;
