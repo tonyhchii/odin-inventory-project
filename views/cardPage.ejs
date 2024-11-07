@@ -13,7 +13,7 @@
         <%- include('partials/sidebar') %>
         <div class="card-container grid">
             <% locals.cards.forEach((card) => { %>
-                <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity}) %>
+                <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname}) %>
             <% }) %>
         </div>
     </div>
