@@ -1,33 +1,15 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.header {
-  margin: 1rem;
-  justify-content: space-between;
-}
-
-.flex {
-  display: flex;
-}
-
-.grid {
-  display: grid;
-}
-
-.body {
-  grid-template-columns: 1fr 4fr;
+.card-price {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .card-container {
   padding: 1rem;
   max-width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   text-align: end;
+  line-height: 1.2;
   background-color: #f9f9f9;
 }
 .card {
@@ -41,8 +23,16 @@
 }
 .card-name {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 .card img {
   max-width: 100%;
+}
+
+.card-description {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.rarity {
+  color: rgba(176, 176, 176, 1);
 }

@@ -1,5 +1,13 @@
 <div class="card">
-    <img src="<%=url %>" alt="">
-    <p>Price: <%=price %></p>
-    <p>Quantity: <%=quantity %></p>
+    <div class="card-img"><img src="<%=url %>" alt=""></div>
+    <div class="card-description flex">
+        <div class="card-header">
+            <b class="card-name"><%=name %></b>
+            <p class="rarity"><%=rarity %></p>
+        </div>
+        <div>
+            <p class="card-price">Price: <%=price %></p>
+            <p>Quantity: <%=quantity %></p>
+        </div>
+    </div>
 </div>
