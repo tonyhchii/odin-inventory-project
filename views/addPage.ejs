@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mainPage.css">
+    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="add.css">
+</head>
+<body>
+    <%- include('partials/header')  %>
+    <div class="body grid">
+        <%- include('partials/sidebar') %>
+        <div class="body-content">
+            <h2> Add Cards </h2>
+            <div class="card-container grid">
+                <% locals.cards.forEach((card) => { %>
+                    <div class="card">
+                        <div class="card-img"><img src="<%=card.images.large %>" alt=""></div>
+                        <div class="card-description flex">
+                            <div class="card-header">
+                                <b class="card-name"><%=card.name %></b>
+                                <p class="rarity"><%=card.rarity %></p>
+                                <p class="rarity"><%=card.set.id.toUpperCase()%>: <%=card.set.series%></p>
+                            </div>
+                            <form action="/add" method="post">
+                                <input type="hidden" name="id" value="<%=card.id%>">
+                                <button class="btn">Add Card</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

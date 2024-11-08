@@ -22,8 +22,8 @@
                         <p class="rarity"><%=card.rarity %></p>
                         <p class="rarity"><%=card.setID%>: <%=card.setName%></p>
                     </div>
-                    <div>
-                        <form class="card-body grid" action="/cards/<%=card.card_id%>" method="POST">
+                    <div class="form-container">
+                        <form class="card-body grid" id="editForm" action="/cards/<%=card.card_id%>" method="POST">
                             <div class="flex form-row">
                                 <p class="card-price">Price: </p> <input name="price" value="<%=card.price %>"/>
                             </div>
@@ -31,6 +31,8 @@
                                 <p>Quantity: </p> <input name="quantity" value="<%=card.quantity %>"/>
                             </div>
                             <button class="btn" type="submit">Save</button>
+                            <button formaction="/cards/<%=card.card_id%>/remove" type="submit" class="remove btn">Remove</button>
+                            
                         </form>
                     </div>
                 </div>

@@ -31,8 +31,22 @@
   align-self: flex-end;
   color: white;
   border: solid 1px black;
+  width: 100%;
 }
 
+.remove {
+  background-color: #ff0000;
+}
 .card-body {
   gap: 1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn:hover {
+  transform: scale(1.02);
 }

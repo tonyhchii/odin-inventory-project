@@ -5,9 +5,4 @@ const cardPageController = async (req, res) => {
   res.render("cardPage", { cards: cards, searchBar: name });
 };
 
-const editPageController = async (req, res) => {
-  const cardID = req.params;
-  const card = await db.getCardById(cardID);
-};
-
 module.exports = cardPageController;

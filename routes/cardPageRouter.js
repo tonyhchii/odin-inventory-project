@@ -7,4 +7,5 @@ const cardPageRouter = Router();
 cardPageRouter.get("/", cardPageController);
 cardPageRouter.get("/:cardID", editPageController.editPageLoader);
 cardPageRouter.post("/:cardID", editPageController.saveContent);
+cardPageRouter.post("/:cardID/remove", editPageController.removeContent);
 module.exports = cardPageRouter;

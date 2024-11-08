@@ -13,4 +13,10 @@ const saveContent = async (req, res) => {
   res.redirect("/cards");
 };
 
-module.exports = { editPageLoader, saveContent };
+const removeContent = async (req, res) => {
+  const { cardID } = req.params;
+  db.removeCardById(cardID);
+  res.redirect("/cards");
+};
+
+module.exports = { editPageLoader, saveContent, removeContent };
