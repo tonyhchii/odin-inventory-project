@@ -13,18 +13,21 @@
     <div class="body grid">
         <%- include('partials/sidebar') %>
         <% if(locals.cards != undefined) { %>
-            <div class="container">
-                <form id="orderByForm" action="/cards" method="GET">
-                    <input name="name" type="hidden" id="search2"/>
-                    <select onchange="getSearch()" name="orderBy" id="orderBy">
-                        <option value="alphabetical">A-Z</option>
-                        <option value="type">Type</option>
-                        <option value="price">Price</option>
-                    </select>
-                </form>
+            <div class="container flex">
+                <div class="orderby">
+                    <form id="orderByForm" action="/cards" method="GET">
+                        <label for="orderBy">Sort By</label>
+                        <input name="name" type="hidden" id="search2"/>
+                        <select onchange=getSearch() name="orderBy" id="orderBy">
+                            <option value="alphabetical">A-Z</option>
+                            <option value="type">Type</option>
+                            <option value="price">Price</option>
+                        </select>
+                    </form>
+                </div>
                 <div class="card-container grid">
                 <% locals.cards.forEach((card) => { %>
-                    <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname}) %>
+                    <%- include('partials/card', {name: card.name, rarity: card.rarity, url: card.url, price: card.price, quantity: card.quantity, setID: card.set_id.toUpperCase(), setName: card.setname, id: card.id}) %>
                 <% }) %>
                 <% }  else { %>
                     <h2>Cards Not Found</h2>
@@ -34,7 +37,7 @@
     </div>
 </body>
 <script>
-    const getSearch = () => {
+    const getSearch = (e) => {
         const searchParams = new URLSearchParams(window.location.search);
         const hiddenSearch = document.getElementById('search2');
         hiddenSearch.value = searchParams.get('name');

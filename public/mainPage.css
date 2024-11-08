@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header {
   margin: 1rem;
   justify-content: space-between;
@@ -35,4 +40,26 @@
 
 .body {
   grid-template-columns: 1fr 4fr;
+  background-color: #f9f9f9;
+}
+
+.sidebar {
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0px 1px 2px 0px #00000033;
+  padding: 1rem;
+}
+.sidebar a {
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: transform 0.4s ease-in-out;
+}
+.sidebar a:hover {
+  transform: scale(1.2);
+}
+
+.container {
+  padding-top: 1rem;
+  flex-direction: column;
 }

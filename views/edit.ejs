@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/mainPage.css">
+    <link rel="stylesheet" href="/card.css">
+    <link rel="stylesheet" href="/edit.css">
+</head>
+
+<body>
+    <%- include('partials/header')  %>
+    <div class="body grid">
+        <%- include('partials/sidebar') %>
+        <div class="container">
+            <div class="card">
+                <div class="card-img"><img src="<%=card.url %>" alt=""></div>
+                <div class="card-description flex">
+                    <div class="card-header">
+                        <b class="card-name"><%=card.name %></b>
+                        <p class="rarity"><%=card.rarity %></p>
+                        <p class="rarity"><%=card.setID%>: <%=card.setName%></p>
+                    </div>
+                    <div>
+                        <form class="card-body grid" action="/cards/<%=card.card_id%>" method="POST">
+                            <div class="flex form-row">
+                                <p class="card-price">Price: </p> <input name="price" value="<%=card.price %>"/>
+                            </div>
+                            <div class="flex form-row">
+                                <p>Quantity: </p> <input name="quantity" value="<%=card.quantity %>"/>
+                            </div>
+                            <button class="btn" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
