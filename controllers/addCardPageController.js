@@ -14,7 +14,7 @@ const loadPage = async (req, res) => {
   const url = urlBase + query;
   await fetch(url)
     .then((res) => res.json())
-    .then((obj) => res.render("addPage", { cards: obj.data }))
+    .then((obj) => res.render("addPage", { cards: obj.data, page: check }))
     .catch((err) => console.error("error:" + err));
 };
 

@@ -32,6 +32,12 @@
                     </div>
                 <% }) %>
             </div>
+            <div class="btn-container flex">
+                <% if (locals.page > 0)  { %>
+                    <a href="/add?page=<%= Number(locals.page) - 1%>"><button class="btn">Prev Page</button></a>
+                <% } %>
+                <a href="/add?page=<%= Number(locals.page) + 1%>"><button class="btn">Next Page</button></a>
+            </div>
         </div>
     </div>
 </body>
