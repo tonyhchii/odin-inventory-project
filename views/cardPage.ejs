@@ -17,6 +17,7 @@
                 <div class="orderby">
                     <form id="orderByForm" action="/cards" method="GET">
                         <label for="orderBy">Sort By</label>
+                        <input name="page" type="hidden" id="page" value="<%= locals.page %>"/>
                         <input name="name" type="hidden" id="search2"/>
                         <select onchange=getSearch() name="orderBy" id="orderBy">
                             <option value="select">Select</option>
@@ -33,7 +34,14 @@
                 <% }  else { %>
                     <h2>Cards Not Found</h2>
                 <% } %>
-                        </div>
+                </div>
+                <div class="btn-container flex">
+                    <% if (locals.page > 1)  { %>
+                        <button form="orderByForm" onclick="prevPage()" class="btn">Prev Page</button>  
+                    <% } if (locals.cards.length == 15) { %>
+                    <button form="orderByForm" onclick="nextPage()" class="btn">Next Page </button>
+                    <% } %>
+                </div>
             </div>
     </div>
 </body>
@@ -44,6 +52,14 @@
         hiddenSearch.value = searchParams.get('name');
         const orderForm = document.getElementById('orderByForm');
         orderForm.submit();
+    }
+    const nextPage = () => {
+        const hiddenPage = document.getElementById('page');
+        hiddenPage.value = Number(hiddenPage.value) + 1
+    }
+    const prevPage = () => {
+        const hiddenPage = document.getElementById('page');
+        hiddenPage.value = Number(hiddenPage.value) - 1
     }
 </script>
 </html>

@@ -51,3 +51,22 @@ a {
 .card:hover {
   transform: scale(1.05);
 }
+
+.btn {
+  background-color: #24a0ed;
+  padding: 0.75rem 1.4rem;
+  border-radius: 1rem;
+  align-self: flex-end;
+  color: white;
+  border: solid 1px black;
+  transition: transform 0.4s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn-container {
+  gap: 1rem;
+  padding: 1rem;
+}

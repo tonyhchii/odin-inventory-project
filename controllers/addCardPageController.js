@@ -10,8 +10,8 @@ const urlOptions =
 const loadPage = async (req, res) => {
   const { page } = req.query;
   const check = page ? page : 1;
-  const query = `?page=${check}&` + urlOptions;
-  const url = urlBase + query;
+  const query = `?page=${check}&`;
+  const url = urlBase + query + urlOptions;
   await fetch(url)
     .then((res) => res.json())
     .then((obj) => res.render("addPage", { cards: obj.data, page: check }))
@@ -21,9 +21,13 @@ const loadPage = async (req, res) => {
 const addCard = async (req, res) => {
   const { id } = req.body;
   const url = urlBase + `/${id}?` + urlOptions;
+
   await fetch(url)
     .then((res) => res.json())
-    .then((obj) =>
+    .then((obj) => {
+      const price = obj.data.tcgplayer.prices.holofoil.market
+        ? obj.data.tcgplayer.prices.holofoil.market
+        : 1;
       db.addCard(
         obj.data.id,
         obj.data.set.id,
@@ -34,9 +38,9 @@ const addCard = async (req, res) => {
         obj.data.types[0],
         obj.data.rarity,
         obj.data.images.large,
-        obj.data.tcgplayer.prices.holofoil.market
-      )
-    )
+        price
+      );
+    })
     .catch((err) => console.error("error: " + err));
 };
 

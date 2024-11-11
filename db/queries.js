@@ -29,14 +29,15 @@ const getAllSets = async () => {
   return rows;
 };
 
-const getCardByName = async (name, orderBy) => {
+const getCardByName = async (name, orderBy, check) => {
+  const offset = 0 + (check - 1) * 15;
   const appendSQL = getOrderBy(orderBy);
   const SQL =
     "SELECT cards.name as name, cards.url as url, cards.card_id as id, sets.name as setName, rarity, quantity, price, type, sets.set_id FROM cards JOIN sets ON sets.set_id = cards.set_id WHERE lower(cards.name) LIKE $1" +
     appendSQL +
-    " LIMIT 15";
+    " LIMIT 15 OFFSET $2";
   name = name ? name : "";
-  const { rows } = await pool.query(SQL, [`${name.toLowerCase()}%`]);
+  const { rows } = await pool.query(SQL, [`${name.toLowerCase()}%`, offset]);
   return rows;
 };
 
