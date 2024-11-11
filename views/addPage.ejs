@@ -13,31 +13,63 @@
     <div class="body grid">
         <%- include('partials/sidebar') %>
         <div class="body-content">
+            <form id="card-search" action="/add" method="get">
+                <label for="name">Name :</label>
+                <input type="text" value="<%= locals.name %>" name="name" id="name">
+                <label for="setID">Set ID :</label>
+                <input type="text" value="<%= locals.setID %>" name="setID" id="setID">
+                <label for="setName">Set Name :</label>
+                <input type="text" value="<%= locals.setName %>" name="setName" id="setName">
+                <label for="series">Series</label>
+                <input type="text" value="<%= locals.series %>" name="series" id="series">
+                <input type="hidden" name="page" id="page" value="<%=locals.page %>">
+                <button onclick="resetPage()" type="submit">Search</button>
+            </form>
             <div class="card-container grid">
-                <% locals.cards.forEach((card) => { %>
-                    <div class="card">
-                        <div class="card-img"><img src="<%=card.images.large %>" alt=""></div>
-                        <div class="card-description flex">
-                            <div class="card-header">
-                                <b class="card-name"><%=card.name %></b>
-                                <p class="rarity"><%=card.rarity %></p>
-                                <p class="rarity"><%=card.set.id.toUpperCase()%>: <%=card.set.series%></p>
+                <% if(locals.cards) { %> 
+                    <% locals.cards.forEach((card) => { %>
+                        <div class="card">
+                            <div class="card-img"><img src="<%=card.images.large %>" alt=""></div>
+                            <div class="card-description flex">
+                                <div class="card-header">
+                                    <b class="card-name"><%=card.name %></b>
+                                    <p class="rarity"><%=card.rarity %></p>
+                                    <p class="rarity"><%=card.set.id.toUpperCase()%>: <%=card.set.series%></p>
+                                </div>
+                                <form action="/add" method="post">
+                                    <input type="hidden" name="id" value="<%=card.id%>">
+                                    <button class="btn">Add Card</button>
+                                </form>
                             </div>
-                            <form action="/add" method="post">
-                                <input type="hidden" name="id" value="<%=card.id%>">
-                                <button class="btn">Add Card</button>
-                            </form>
                         </div>
-                    </div>
-                <% }) %>
+                    <% }) %>
+                    <% } %>
             </div>
             <div class="btn-container flex">
-                <% if (locals.page > 0)  { %>
-                    <a href="/add?page=<%= Number(locals.page) - 1%>"><button class="btn">Prev Page</button></a>
-                <% } %>
-                <a href="/add?page=<%= Number(locals.page) + 1%>"><button class="btn">Next Page</button></a>
+                <div class="btn-container flex">
+                    <% if (locals.page > 1)  { %>
+                        <button form="card-search" onclick="prevPage()" class="btn">Prev Page</button>  
+                    <% } if (locals.cards && locals.cards.length == 15) { %>
+                    <button form="card-search" onclick="nextPage()" class="btn">Next Page </button>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    const nextPage = () => {
+        const hiddenPage = document.getElementById('page');
+        hiddenPage.value = Number(hiddenPage.value) + 1
+    }
+    const prevPage = () => {
+        const hiddenPage = document.getElementById('page');
+        hiddenPage.value = Number(hiddenPage.value) - 1
+    }
+
+    const resetPage = () => {
+        const hiddenPage = document.getElementById('page');
+        hiddenPage.value = 1;
+    }
+</script>
 </html>

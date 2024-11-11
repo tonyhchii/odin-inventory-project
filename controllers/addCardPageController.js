@@ -8,13 +8,27 @@ const urlOptions =
   "pageSize=15&select=id,name,types,set,images,tcgplayer,rarity";
 
 const loadPage = async (req, res) => {
-  const { page } = req.query;
-  const check = page ? page : 1;
-  const query = `?page=${check}&`;
-  const url = urlBase + query + urlOptions;
+  const { page, name, setID, series, setName } = req.query;
+  const pageCheck = page ? page : 1;
+  const nameCheck = name ? name : "";
+  const setIDCheck = setID ? setID : "";
+  const seriesCheck = series ? series : "";
+  const setNameCheck = setName ? setName : "";
+  const pageQuery = `?page=${pageCheck}&`;
+  const query = `q=name:"*${nameCheck}*"+set.id:"${setIDCheck}*"+set.series:"${seriesCheck}*"+set.name:"${setNameCheck}*"&`;
+  const url = urlBase + pageQuery + query + urlOptions;
   await fetch(url)
     .then((res) => res.json())
-    .then((obj) => res.render("addPage", { cards: obj.data, page: check }))
+    .then((obj) =>
+      res.render("addPage", {
+        cards: obj.data,
+        page: pageCheck,
+        name: nameCheck,
+        setID: setIDCheck,
+        series: seriesCheck,
+        setName: setNameCheck,
+      })
+    )
     .catch((err) => console.error("error:" + err));
 };
 
@@ -25,9 +39,9 @@ const addCard = async (req, res) => {
   await fetch(url)
     .then((res) => res.json())
     .then((obj) => {
-      const price = obj.data.tcgplayer.prices.holofoil.market
+      const price = obj.data.tcgplayer.prices.holofoil
         ? obj.data.tcgplayer.prices.holofoil.market
-        : 1;
+        : obj.data.tcgplayer.prices.normal.market;
       db.addCard(
         obj.data.id,
         obj.data.set.id,
